@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                    count
+-------------------  -------
+align_assemblies_fa        1
+all                        1
+parse_alignments           1
+total                      3
+
+Select jobs to execute...
+
+[Sun Oct  8 22:24:25 2023]
+rule align_assemblies_fa:
+    input: /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/data/testset_input/List_001.fa
+    output: /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/Benchmarking_paper/test/test_align/align_out/List_001_tblastxout.txt
+    jobid: 2
+    reason: Missing output files: /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/Benchmarking_paper/test/test_align/align_out/List_001_tblastxout.txt
+    wildcards: sample=List_001
+    resources: tmpdir=/var/folders/l4/zrzftwh119v2b4r9lzxqp9n80000gp/T
+
+[Sun Oct  8 22:24:25 2023]
+Error in rule align_assemblies_fa:
+    jobid: 2
+    input: /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/data/testset_input/List_001.fa
+    output: /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/Benchmarking_paper/test/test_align/align_out/List_001_tblastxout.txt
+    shell:
+        tblastx -query ../data/databases/pan_genome_reference_finalmodel_featurefilt.fa -subject /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/data/testset_input/List_001.fa -outfmt 6 -out /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/Benchmarking_paper/test/test_align/align_out/List_001_tblastxout.txt -evalue 0.001 -max_hsps 1
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-10-08T222424.272805.snakemake.log

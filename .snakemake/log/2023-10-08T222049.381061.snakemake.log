@@ -1,0 +1,3 @@
+AttributeError in file /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/workflow/Snakefile, line 54:
+module 'os' has no attribute 'abspath'
+  File "/Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/workflow/Snakefile", line 54, in <module>

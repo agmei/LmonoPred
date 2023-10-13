@@ -1,0 +1,28 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                 count
+----------------  -------
+all                     1
+parse_alignments        1
+total                   2
+
+Select jobs to execute...
+
+[Sun Oct  8 23:28:30 2023]
+rule parse_alignments:
+    input: /Users/algm/Benchmarking_paper_test/test_align/align_out/List_001_tblastxout.txt
+    output: /Users/algm/Benchmarking_paper_test/test_align/align_out/align_identities_out.csv
+    jobid: 1
+    reason: Missing output files: /Users/algm/Benchmarking_paper_test/test_align/align_out/align_identities_out.csv
+    resources: tmpdir=/var/folders/l4/zrzftwh119v2b4r9lzxqp9n80000gp/T
+
+Waiting at most 5 seconds for missing files.
+MissingOutputException in rule parse_alignments in file /Users/algm/bin/LmonoPred/workflow/rules/align.smk, line 52:
+Job 1  completed successfully, but some output files are missing. Missing files after 5 seconds. This might be due to filesystem latency. If that is the case, consider to increase the wait time with --latency-wait:
+/Users/algm/Benchmarking_paper_test/test_align/align_out/align_identities_out.csv
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-10-08T232829.943372.snakemake.log

@@ -1,0 +1,78 @@
+import sys
+import time
+import os
+import argparse 
+import glob
+import re
+import pickle
+import pandas as pd
+
+
+def get_pairs(filelist):
+    pairs=list()
+    
+    for f in filelist:
+        tmp_n=re.split("_R?[1|2][.|_]", f)[0]
+        # print(f,tmp_n)
+        r_tmp=re.compile(f"^{tmp_n}_R?[1|2][.|_]")
+        pair_tmp=sorted(list(filter(r_tmp.search, rawr)))
+        if pair_tmp not in pairs:
+            pairs.append(pair_tmp)
+    return pairs
+    
+
+
+# # read the arguments
+ind=os.path.realpath(config['ind'])
+outd=os.path.realpath(config['outd'])
+
+# taking care of possible white spaces in path
+#ind=ind.replace(' ', '\\ ')
+#outd=outd.replace(' ', '\\ ')
+#db_assbly=os.path.realpath(config['db_assbly'])
+cores=1
+
+print("Input directory:\n"+ind)
+print("Output directory:\n"+outd)
+
+
+#create file structure
+if not os.path.isdir(outd):
+    os.makedirs(outd)
+    #outd=os.path.realpath(argv.outd)
+    
+#create align_out folder
+align_outd=os.path.join(outd,"align_out")
+if not os.path.isdir(align_outd):
+    os.makedirs(align_outd)
+
+# check input directory for files
+if ind != False:
+    job_ids=[]
+
+    # find all the files in the directory
+    infiles=os.listdir(ind)
+
+    # find all assbly with ending .fna, .fasta, .fa
+    # find all raw reads with ending .fastq.gz, .fastq., .fq, .fq.gz
+    assbly=[f for f in infiles if (f.endswith(".fna") or f.endswith(".fasta") or f.endswith(".fa"))]
+    rawr=[f for f in infiles if (f.endswith(".fastq.gz") or f.endswith(".fastq") or f.endswith(".fq") or f.endswith(".fq.gz"))]
+
+    # find the matching raw files that have either a _1 _2 or _R1 _R2
+    r=re.compile("_R?[1|2][.|_]")
+    raw_pairs=get_pairs(list(filter(r.search, rawr)))
+
+
+# get the ids of the different files (i.e. cut off the extensions)
+# assbly_ids=sorted([f.split(".")[0] for f in assbly])
+assbly_ids=sorted([f.rsplit('.', 1)[0] for f in assbly])
+raw_ids=sorted([f[0].split("_1")[0] for f in raw_pairs])
+
+
+include: "rules/align.smk"
+
+
+rule all:
+    input:
+        outd+"/align_out/align_identities_out.csv"
+

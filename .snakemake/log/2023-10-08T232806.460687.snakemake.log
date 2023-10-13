@@ -1,0 +1,3 @@
+SyntaxError in file /Users/algm/bin/LmonoPred/workflow/rules/align.smk, line 64:
+invalid syntax
+  File "/Users/algm/bin/LmonoPred/workflow/Snakefile", line 72, in <module>
