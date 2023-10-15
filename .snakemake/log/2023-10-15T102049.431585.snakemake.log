@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule parse_alignments in file /Users/algm/bin/LmonoPred/workflow/rules/align.smk, line 52:
+Missing input files for rule parse_alignments:
+    output: /Users/algm/Benchmarking_paper_test/test_align/align_out/align_identities_out.csv
+    affected files:
+        /Users/algm/Benchmarking_paper_test/test_align/align_out/List_002_R1.fastq.gz_kmaout.res

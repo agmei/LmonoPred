@@ -1,0 +1,5 @@
+Building DAG of jobs...
+MissingInputException in rule all in file /Users/algm/bin/LmonoPred/workflow/Snakefile, line 77:
+Missing input files for rule all:
+    affected files:
+        /Users/algm/Benchmarking_paper_test/test_align/vir_align_out/vir_align_identities_out.csv

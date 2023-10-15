@@ -1,0 +1,8 @@
+Building DAG of jobs...
+MissingInputException in rule align_rawreads in file /Users/algm/bin/LmonoPred/workflow/rules/align.smk, line 39:
+Missing input files for rule align_rawreads:
+    output: /Users/algm/Benchmarking_paper_test/test_align/align_out/List_002_R1.fastq.gz_kmaout.res
+    wildcards: sample=List_002_R1.fastq.gz
+    affected files:
+        /Users/algm/bin/LmonoPred/data/testset_input/List_002_R1.fastq.gz_R2.fastq.gz
+        /Users/algm/bin/LmonoPred/data/testset_input/List_002_R1.fastq.gz_R1.fastq.gz
