@@ -71,7 +71,7 @@ assbly_ids=sorted([f.rsplit('.', 1)[0] for f in assbly])
 raw_ids=sorted([re.split("_R?[1|2][.|_]",f[0])[0] for f in raw_pairs])
 
 
-include: "rules/align.smk"
+include: "rules/virulencepred_align.smk"
 
 
 rule all:
