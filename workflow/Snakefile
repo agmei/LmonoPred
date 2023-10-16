@@ -42,9 +42,9 @@ if not os.path.isdir(outd):
     #outd=os.path.realpath(argv.outd)
     
 #create align_out folder
-align_outd=os.path.join(outd,"align_out")
-if not os.path.isdir(align_outd):
-    os.makedirs(align_outd)
+# align_outd=os.path.join(outd,"align_out")
+# if not os.path.isdir(align_outd):
+#     os.makedirs(align_outd)
 
 # check input directory for files
 if ind != False:
@@ -72,11 +72,16 @@ raw_ids=sorted([re.split("_R?[1|2][.|_]",f[0])[0] for f in raw_pairs])
 
 
 include: "rules/virulencepred_align.smk"
+include: "rules/disinfpred_align.smk"
 
+
+# rule all:
+#     input:
+#         outd+"/vir_align_out/vir_align_identities_out.csv"
 
 rule all:
     input:
-        outd+"/vir_align_out/vir_align_identities_out.csv"
+        outd+"/disinf_align_out/disinf_align_identities_out.csv"
 
 # rule all:
 #     input:

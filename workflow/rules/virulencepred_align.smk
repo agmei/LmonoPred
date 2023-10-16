@@ -5,7 +5,7 @@ rule align_assemblies_fa:
     output:
         outd+"/vir_align_out/{sample}_tblastxout.txt"
     params:
-        db="data/databases/pan_genome_reference_finalmodel_featurefilt.fa"
+        db="data/databases/vir_pan_genome_reference_finalmodel_featurefilt.fa"
     shell:
         'tblastx -query {params.db} -subject {input.sample} -outfmt 6 -out {output} -evalue 0.001 -max_hsps 1'
 
@@ -28,7 +28,7 @@ rule align_rawreads:
     output:
         outd+"/vir_align_out/{sample}_kmaout.res"
     params:
-        db="data/databases/kma_pangenome_virulence/kma_pangenome_nucleotide_finalmodel_featurefilt",
+        db="data/databases/kma_pangenome_vir/kma_pangenome_nucleotide_finalmodel_featurefilt",
         outn=outd+"/vir_align_out/{sample}_kmaout"
     shell:
         "kma -ipe {input[0]} {input[1]} -o {params.outn} -t_db {params.db} -1t1"
@@ -43,7 +43,7 @@ rule parse_alignments:
         outd+"/vir_align_out/vir_align_identities_out.csv"
     params:
         indir=outd+"/vir_align_out/",
-        db="data/databases/virulence_genes_nuc_database.fa",
+        db="data/databases/vir_pan_genome_reference_finalmodel_featurefilt.fa",
         outn="vir_align_identities_out.csv"
     threads: cores
     shell:
