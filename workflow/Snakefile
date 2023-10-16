@@ -73,17 +73,20 @@ raw_ids=sorted([re.split("_R?[1|2][.|_]",f[0])[0] for f in raw_pairs])
 
 include: "rules/virulencepred_align.smk"
 include: "rules/disinfpred_align.smk"
-
+include: "rules/predict.smk"
 
 # rule all:
 #     input:
 #         outd+"/vir_align_out/vir_align_identities_out.csv"
 
-rule all:
-    input:
-        outd+"/disinf_align_out/disinf_align_identities_out.csv"
+# rule all:
+#     input:
+#         outd+"/disinf_align_out/disinf_align_identities_out.csv"
 
 # rule all:
 #     input:
 #         outd+"/align_out/List_002_kmaout.res"
 
+rule all:
+    input:
+        outd+"/virulence_prediction_out.csv"
