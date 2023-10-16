@@ -1,0 +1,33 @@
+Building DAG of jobs...
+Using shell: /bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job                  count
+-----------------  -------
+all                      1
+predict_virulence        1
+total                    2
+
+Select jobs to execute...
+
+[Mon Oct 16 13:50:17 2023]
+rule predict_virulence:
+    input: /Users/algm/Benchmarking_paper_test/test_align/vir_align_out/vir_align_identities_out.csv
+    output: /Users/algm/Benchmarking_paper_test/test_align/virulence_prediction_out.csv
+    jobid: 1
+    reason: Missing output files: /Users/algm/Benchmarking_paper_test/test_align/virulence_prediction_out.csv
+    resources: tmpdir=/var/folders/l4/zrzftwh119v2b4r9lzxqp9n80000gp/T
+
+[Mon Oct 16 13:50:18 2023]
+Error in rule predict_virulence:
+    jobid: 1
+    input: /Users/algm/Benchmarking_paper_test/test_align/vir_align_out/vir_align_identities_out.csv
+    output: /Users/algm/Benchmarking_paper_test/test_align/virulence_prediction_out.csv
+    shell:
+        python3 workflow/scripts/virulence_prediction.py --vir-align /Users/algm/Benchmarking_paper_test/test_align/vir_align_out/vir_align_identities_out.csv -outd /Users/algm/Benchmarking_paper_test/test_align
+        (one of the commands exited with non-zero exit code; note that snakemake uses bash strict mode!)
+
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: .snakemake/log/2023-10-16T135017.325842.snakemake.log

@@ -87,6 +87,10 @@ include: "rules/predict.smk"
 #     input:
 #         outd+"/align_out/List_002_kmaout.res"
 
+# rule all:
+#     input:
+#         outd+"/virulence_prediction_out.csv"
+
 rule all:
     input:
-        outd+"/virulence_prediction_out.csv"
+        outd+"/disinftolerance_prediction_out.csv"

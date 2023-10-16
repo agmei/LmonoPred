@@ -1,0 +1,6 @@
+Building DAG of jobs...
+MissingInputException in rule predict_virulence in file /Users/algm/bin/LmonoPred/workflow/rules/predict.smk, line 2:
+Missing input files for rule predict_virulence:
+    output: /Users/algm/Benchmarking_paper_test/test_align/virulence_prediction_out.csv
+    affected files:
+        /Users/algm/Benchmarking_paper_test/test_align/align_out/align_identities_out.csv
