@@ -1,3 +1,0 @@
-FileNotFoundError in file /Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/workflow/Snakefile, line 54:
-[Errno 2] No such file or directory: '/Users/algm/OneDrive\\ -\\ Danmarks\\ Tekniske\\ Universitet/PhD/Project/bin/LmonoPred/data/testset_input'
-  File "/Users/algm/OneDrive - Danmarks Tekniske Universitet/PhD/Project/bin/LmonoPred/workflow/Snakefile", line 54, in <module>

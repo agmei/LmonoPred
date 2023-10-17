@@ -1,0 +1,11 @@
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+  - anaconda
+dependencies:
+  - python=3.8.3
+  - scikit-learn=1.2.1
+  - joblib=1.2.0
+  - pandas
+  - imbalanced-learn

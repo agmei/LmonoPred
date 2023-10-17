@@ -1,11 +1,5 @@
-import sys
-import time
 import os
-import argparse 
-import glob
 import re
-import pickle
-import pandas as pd
 
 
 def get_pairs(filelist):
@@ -87,10 +81,20 @@ include: "rules/predict.smk"
 #     input:
 #         outd+"/align_out/List_002_kmaout.res"
 
-# rule all:
-#     input:
-#         outd+"/virulence_prediction_out.csv"
-
 rule all:
     input:
-        outd+"/disinftolerance_prediction_out.csv"
+        outd+"/prediction/virulence_prediction_out.csv"
+
+# rule all:
+#     input:
+#         outd+"/prediction/disinftolerance_prediction_out.csv"
+
+# rule all:
+#     input:
+#         outd+"/prediction/virulence_prediction_out.csv",
+#         outd+"/prediction/disinftolerance_prediction_out.csv"
+
+
+
+
+

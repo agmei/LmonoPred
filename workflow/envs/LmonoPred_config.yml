@@ -1,0 +1,10 @@
+channels:
+  - conda-forge
+  - defaults
+  - bioconda
+  - anaconda
+dependencies:
+  - pandas
+  - blast
+  - biopython
+  - kma

@@ -4,6 +4,8 @@ rule disinf_align_assemblies_fa:
         sample=ind+"/{sample}.fa"
     output:
         outd+"/disinf_align_out/{sample}_tblastxout.txt"
+    conda:
+        "../envs/LmonoPred_config.yml"
     params:
         db="data/databases/disinf_pan_genome_reference.fa"
     shell:
@@ -27,6 +29,8 @@ rule disinf_align_rawreads:
         ind+"/{sample}_R1.fastq.gz", ind+"/{sample}_R2.fastq.gz"
     output:
         outd+"/disinf_align_out/{sample}_kmaout.res"
+    conda:
+        "../envs/LmonoPred_config.yml"
     params:
         db="data/databases/kma_pangenome_disinf/disinf_pan_genome_reference",
         outn=outd+"/disinf_align_out/{sample}_kmaout"
@@ -41,6 +45,8 @@ rule disinf_parse_alignments:
         expand("{outd}/disinf_align_out/{sample}_kmaout.res", outd=outd, sample=raw_ids)
     output:
         outd+"/disinf_align_out/disinf_align_identities_out.csv"
+    conda:
+        "../envs/LmonoPred_config.yml"
     params:
         indir=outd+"/disinf_align_out/",
         db="data/databases/disinf_pan_genome_reference.fa",
