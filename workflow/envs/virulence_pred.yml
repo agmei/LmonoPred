@@ -4,8 +4,8 @@ channels:
   - bioconda
   - anaconda
 dependencies:
-  - python=3.8.3
+  - python>=3.8.3
   - scikit-learn=1.1.2
-  - joblib=1.1.0
-  - pandas
-  - imbalanced-learn
+  - joblib>=1.1.0,<2
+  - pandas>=2.1.1,<3
+  - imbalanced-learn=0.11.0
