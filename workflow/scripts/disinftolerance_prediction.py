@@ -1,3 +1,9 @@
+# import warnings filter
+from warnings import simplefilter
+# ignore all future warnings
+simplefilter(action='ignore', category=FutureWarning)
+
+
 import os
 import argparse
 import joblib
