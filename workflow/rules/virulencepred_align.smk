@@ -76,7 +76,7 @@ rule parse_alignments:
         indir=outd+"/vir_align_out/",
         db="data/databases/vir_pan_genome_reference_finalmodel_featurefilt.fa",
         outn="vir_align_identities_out.csv"
-    threads: cores
+    threads: 4
     shell:
         "python3 workflow/scripts/parallel_parse_alignout.py {params.indir} {params.db} {params.outn} {threads}"
 

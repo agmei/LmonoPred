@@ -23,3 +23,19 @@ rule predict_disinftolerance:
         outd=outd+"/prediction"
     shell:
         "python3 workflow/scripts/disinftolerance_prediction.py --disinf-align {input} --outd {params.outd}"
+
+
+
+rule combine_predictions:
+    input:
+        virpred=outd+"/prediction/virulence_prediction_out.csv",
+        disinfpred=outd+"/prediction/disinftolerance_prediction_out.csv"
+    output:
+        outd+"/prediction/combined_predictions_out.csv"
+    conda:
+        "../envs/LmonoPred_config.yml"
+    params:
+        outd=outd+'/prediction'
+    shell:
+        "python3 workflow/scripts/combine_predictions.py --vir-pred {input.virpred} --disinf-pred {input.disinfpred} --outd {params.outd}"
+     

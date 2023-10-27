@@ -79,7 +79,7 @@ rule disinf_parse_alignments:
         indir=outd+"/disinf_align_out/",
         db="data/databases/disinf_pan_genome_reference.fa",
         outn="disinf_align_identities_out.csv"
-    threads: cores
+    threads: 4
     shell:
         "python3 workflow/scripts/parallel_parse_alignout.py {params.indir} {params.db} {params.outn} {threads}"
 

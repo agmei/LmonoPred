@@ -20,25 +20,15 @@ def get_pairs(filelist):
 ind=os.path.realpath(config['ind'])
 outd=os.path.realpath(config['outd'])
 
-# taking care of possible white spaces in path
-#ind=ind.replace(' ', '\\ ')
-#outd=outd.replace(' ', '\\ ')
-#db_assbly=os.path.realpath(config['db_assbly'])
-cores=1
 
 print("Input directory:\n"+ind)
 print("Output directory:\n"+outd)
 
-
 #create file structure
 if not os.path.isdir(outd):
     os.makedirs(outd)
-    #outd=os.path.realpath(argv.outd)
     
-#create align_out folder
-# align_outd=os.path.join(outd,"align_out")
-# if not os.path.isdir(align_outd):
-#     os.makedirs(align_outd)
+    
 
 # check input directory for files
 if ind != False:
@@ -59,54 +49,19 @@ if ind != False:
 
 
 # get the ids of the different files (i.e. cut off the extensions)
-# assbly_ids=sorted([f.split(".")[0] for f in assbly])
 assbly_ids=sorted([f.rsplit('.', 1)[0] for f in assbly])
-# raw_ids=sorted([f[0].split("_R1")[0] for f in raw_pairs])
 # regex split to account for different fine names (e.g., _R1.fastq.gz, _1.fastq.gz)
 raw_pairs_ids=sorted([re.split("_R?[1|2][.|_]",f[0])[0] for f in raw_pairs])
 raw_singles_ids=sorted([f.rsplit('_SE', 1)[0] for f in raw_singles])
 
-print(assbly_ids)
-print(raw_pairs_ids)
-print(raw_singles_ids)
 
 include: "rules/virulencepred_align.smk"
 include: "rules/disinfpred_align.smk"
 include: "rules/predict.smk"
 
-# rule all:
-#     input:
-#         outd+"/vir_align_out/vir_align_identities_out.csv"
 
 rule all:
     input:
-        outd+"/disinf_align_out/disinf_align_identities_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/long_read/vir_align_out/LM001_kmaout.res"
-
-# rule all:
-#     input:
-#         outd+"/vir_align_out/List_002_kmaout.res",
-#         outd+"/vir_align_out/List_001_tblastxout.txt",
-#         outd+"/vir_align_out/LM001_kmaout.fsa",
-#         outd+"/vir_align_out/List_XXX_kmaout.res"
-
-# rule all:
-#     input:
-#         outd+"/prediction/virulence_prediction_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/prediction/disinftolerance_prediction_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/prediction/virulence_prediction_out.csv",
-#         outd+"/prediction/disinftolerance_prediction_out.csv"
-
-
-
+        outd+"/prediction/combined_predictions_out.csv",
 
 
