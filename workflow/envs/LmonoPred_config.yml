@@ -8,3 +8,4 @@ dependencies:
   - blast
   - biopython
   - kma
+  - joblib=1.2.0
