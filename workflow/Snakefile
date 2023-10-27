@@ -10,7 +10,7 @@ def get_pairs(filelist):
         # print(f,tmp_n)
         r_tmp=re.compile(f"^{tmp_n}_R?[1|2][.|_]")
         pair_tmp=sorted(list(filter(r_tmp.search, rawr)))
-        if pair_tmp not in pairs:
+        if pair_tmp not in pairs and len(pair_tmp)==2:
             pairs.append(pair_tmp)
     return pairs
     
@@ -20,25 +20,15 @@ def get_pairs(filelist):
 ind=os.path.realpath(config['ind'])
 outd=os.path.realpath(config['outd'])
 
-# taking care of possible white spaces in path
-#ind=ind.replace(' ', '\\ ')
-#outd=outd.replace(' ', '\\ ')
-#db_assbly=os.path.realpath(config['db_assbly'])
-cores=1
 
 print("Input directory:\n"+ind)
 print("Output directory:\n"+outd)
 
-
 #create file structure
 if not os.path.isdir(outd):
     os.makedirs(outd)
-    #outd=os.path.realpath(argv.outd)
     
-#create align_out folder
-# align_outd=os.path.join(outd,"align_out")
-# if not os.path.isdir(align_outd):
-#     os.makedirs(align_outd)
+    
 
 # check input directory for files
 if ind != False:
@@ -55,46 +45,23 @@ if ind != False:
     # find the matching raw files that have either a _1 _2 or _R1 _R2
     r=re.compile("_R?[1|2][.|_]")
     raw_pairs=get_pairs(list(filter(r.search, rawr)))
+    raw_singles=list(set(rawr)-set(chain.from_iterable(raw_pairs)))
 
 
 # get the ids of the different files (i.e. cut off the extensions)
-# assbly_ids=sorted([f.split(".")[0] for f in assbly])
 assbly_ids=sorted([f.rsplit('.', 1)[0] for f in assbly])
-# raw_ids=sorted([f[0].split("_R1")[0] for f in raw_pairs])
 # regex split to account for different fine names (e.g., _R1.fastq.gz, _1.fastq.gz)
-raw_ids=sorted([re.split("_R?[1|2][.|_]",f[0])[0] for f in raw_pairs])
+raw_pairs_ids=sorted([re.split("_R?[1|2][.|_]",f[0])[0] for f in raw_pairs])
+raw_singles_ids=sorted([f.rsplit('_SE', 1)[0] for f in raw_singles])
 
 
 include: "rules/virulencepred_align.smk"
 include: "rules/disinfpred_align.smk"
 include: "rules/predict.smk"
 
-# rule all:
-#     input:
-#         outd+"/vir_align_out/vir_align_identities_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/disinf_align_out/disinf_align_identities_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/align_out/List_002_kmaout.res"
 
 rule all:
     input:
-        outd+"/prediction/virulence_prediction_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/prediction/disinftolerance_prediction_out.csv"
-
-# rule all:
-#     input:
-#         outd+"/prediction/virulence_prediction_out.csv",
-#         outd+"/prediction/disinftolerance_prediction_out.csv"
-
-
-
+        outd+"/prediction/combined_predictions_out.csv",
 
 
