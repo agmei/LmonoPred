@@ -31,7 +31,8 @@ rule combine_predictions:
         virpred=outd+"/prediction/virulence_prediction_out.csv",
         disinfpred=outd+"/prediction/disinftolerance_prediction_out.csv"
     output:
-        outd+"/prediction/combined_predictions_out.csv"
+        outd+"/prediction/combined_predictions_out_numerical.csv",
+        outd+"/prediction/combined_predictions_out_categorical.csv"
     conda:
         "../envs/LmonoPred_config.yml"
     params:

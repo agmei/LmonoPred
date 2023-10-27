@@ -26,11 +26,23 @@ vir_preds_df=pd.read_csv(vir_pred, sep=';', index_col=(0), decimal='.')
 disinf_preds_df=pd.read_csv(disinf_pred, sep=';', index_col=(0), decimal='.')
 
 
-# make prediction dataframe and save to csv
-comb_preds_df=vir_preds_df.join(disinf_preds_df)
-comb_preds_df.to_csv(os.path.join(outd, "combined_predictions_out.csv"), sep=";")
+# rename dicts 
+dis_num={1: 0,
+         2: 1}
+vir_cat={1: "low",
+         2: "medium",
+         3: "high"}
+dis_cat={1: "susceptible",
+         2: "tolerant"}
+
+# make prediction dataframe and save to csv (numerical output)
+comb_preds_df_num=vir_preds_df.join(disinf_preds_df.replace(dis_num))
+comb_preds_df_num.to_csv(os.path.join(outd, "combined_predictions_out_numerical.csv"), sep=";")
 
 
+# make prediction dataframe and save to csv (categorical output)
+comb_preds_df_cat=vir_preds_df.replace(vir_cat).join(disinf_preds_df.replace(dis_cat))
+comb_preds_df_cat.to_csv(os.path.join(outd, "combined_predictions_out_categorical.csv"), sep=";")
 
 
 

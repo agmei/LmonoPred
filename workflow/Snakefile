@@ -1,6 +1,6 @@
 import os
 import re
-
+from itertools import chain
 
 def get_pairs(filelist):
     pairs=list()
@@ -8,7 +8,7 @@ def get_pairs(filelist):
     for f in filelist:
         tmp_n=re.split("_R?[1|2][.|_]", f)[0]
         # print(f,tmp_n)
-        r_tmp=re.compile(f"^{tmp_n}_R?[1|2][.|_]")
+        r_tmp=re.compile("^{}_R?[1|2][.|_]".format(tmp_n))
         pair_tmp=sorted(list(filter(r_tmp.search, rawr)))
         if pair_tmp not in pairs and len(pair_tmp)==2:
             pairs.append(pair_tmp)
@@ -62,6 +62,7 @@ include: "rules/predict.smk"
 
 rule all:
     input:
-        outd+"/prediction/combined_predictions_out.csv",
+        outd+"/prediction/combined_predictions_out_numerical.csv",
+        outd+"/prediction/combined_predictions_out_categorical.csv"
 
 
