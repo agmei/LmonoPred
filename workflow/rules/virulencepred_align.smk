@@ -36,7 +36,7 @@ rule align_rawreads:
         db="data/databases/kma_pangenome_vir/kma_pangenome_nucleotide_finalmodel_featurefilt",
         outn=outd+"/vir_align_out/{sample}_kmaout"
     shell:
-        "kma -ipe {input.sample1} {input.sample2} -o {params.outn} -t_db {params.db} -1t1"
+        "kma -ipe {input.sample1} {input.sample2} -o {params.outn} -t_db {params.db}"
 
 # kma for files that end with '.fq.gz'
 use rule align_rawreads as align_assemblies_fq with:
@@ -59,7 +59,7 @@ rule align_rawreads_longreads:
         db="data/databases/kma_pangenome_vir/kma_pangenome_nucleotide_finalmodel_featurefilt",
         outn=outd+"/vir_align_out/{longsample}_kmaout"
     shell:
-        "kma -i {input.sample} -o {params.outn} -t_db {params.db} -mem_mode -mp 20 -mrs 0.0 -bcNano -bc 0.7"
+        "kma -i {input.sample} -o {params.outn} -t_db {params.db} -bcNano -bc 0.7"
 
 
 # parse alignment output
@@ -78,5 +78,5 @@ rule parse_alignments:
         outn="vir_align_identities_out.csv"
     threads: 4
     shell:
-        "python3 workflow/scripts/parallel_parse_alignout.py {params.indir} {params.db} {params.outn} {threads}"
+        "python3 workflow/scripts/parallel_parse_alignout_kmalowdepthfilt.py {params.indir} {params.db} {params.outn} {threads}"
 
