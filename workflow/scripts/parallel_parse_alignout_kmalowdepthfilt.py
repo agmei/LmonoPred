@@ -115,9 +115,11 @@ def parse_kma_out(virgenesall,col,currfile):
             # to create a dictionary with the gene name as key
             # and a list of identities coresponding to the order of the
             # samplenames list
-            #data.setdefault(virgene,[]).append(identity)
-            data_.setdefault(virgene, float(identity))
-            virgenesl.append(virgene)
+            # Also filter for hits with depth lower than 5
+            depth=float(cols[outcol_names.index("Depth")])
+            if depth >= 5.0:
+                data_.setdefault(virgene, float(identity))
+                virgenesl.append(virgene)
 
     fi.close()
 
