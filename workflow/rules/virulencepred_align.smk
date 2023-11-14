@@ -5,7 +5,7 @@ rule align_assemblies_fa:
     output:
         outd+"/vir_align_out/{sample}_tblastxout.txt"
     conda:
-        "../envs/LmonoPred_config.yml"
+        "../envs/ListPred_config.yml"
     params:
         db="data/databases/vir_pan_genome_reference_finalmodel_featurefilt.fa"
     shell:
@@ -31,7 +31,7 @@ rule align_rawreads:
     output:
         outd+"/vir_align_out/{sample}_kmaout.res"
     conda:
-        "../envs/LmonoPred_config.yml"
+        "../envs/ListPred_config.yml"
     params:
         db="data/databases/kma_pangenome_vir/kma_pangenome_nucleotide_finalmodel_featurefilt",
         outn=outd+"/vir_align_out/{sample}_kmaout"
@@ -54,7 +54,7 @@ rule align_rawreads_longreads:
     output:
         outd+"/vir_align_out/{longsample}_kmaout.fsa"
     conda:
-        "../envs/LmonoPred_config.yml"
+        "../envs/ListPred_config.yml"
     params:
         db="data/databases/kma_pangenome_vir/kma_pangenome_nucleotide_finalmodel_featurefilt",
         outn=outd+"/vir_align_out/{longsample}_kmaout"
@@ -71,7 +71,7 @@ rule parse_alignments:
     output:
         outd+"/vir_align_out/vir_align_identities_out.csv"
     conda:
-        "../envs/LmonoPred_config.yml"
+        "../envs/ListPred_config.yml"
     params:
         indir=outd+"/vir_align_out/",
         db="data/databases/vir_pan_genome_reference_finalmodel_featurefilt.fa",

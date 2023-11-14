@@ -34,7 +34,7 @@ rule combine_predictions:
         outd+"/prediction/combined_predictions_out_numerical.csv",
         outd+"/prediction/combined_predictions_out_categorical.csv"
     conda:
-        "../envs/LmonoPred_config.yml"
+        "../envs/ListPred_config.yml"
     params:
         outd=outd+'/prediction'
     shell:
