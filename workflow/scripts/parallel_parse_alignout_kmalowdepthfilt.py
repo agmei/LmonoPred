@@ -184,7 +184,7 @@ if __name__ == '__main__':
     
     #get results form kma
     kma_res = Parallel(n_jobs=n_cores)(delayed(parse_kma_out)(virgenesall,"Template_Identity", x) for x in kma_out_f)
-    
+
     all_res=blast_res
     all_res.extend(kma_res)
 

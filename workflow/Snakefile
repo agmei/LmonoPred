@@ -1,5 +1,6 @@
 import os
 import re
+import sys
 from itertools import chain
 
 def get_pairs(filelist):
@@ -17,36 +18,62 @@ def get_pairs(filelist):
 
 
 # # read the arguments
-ind=os.path.realpath(config['ind'])
 outd=os.path.realpath(config['outd'])
-
-
-print("Input directory:\n"+ind)
-print("Output directory:\n"+outd)
 
 #create file structure
 if not os.path.isdir(outd):
     os.makedirs(outd)
+
+# check which imput
+if 'ind' in config.keys():
+    ind=os.path.realpath(config['ind'])
+    # find all the files in the directory
+    infiles=os.listdir(ind)
+    print("Input directory:\n"+ind)
+
+if 'inp' in config.keys():
+    inp=os.path.realpath(config['inp'])
+    infiles=[os.path.basename(inp)]
+    print("Input:\n"+inp)
+    # We need an ind, cause it is called in the 
+    # individual rule files
+    ind=os.path.dirname(inp)
+
+# need to fix ipe input
+# how to handle the two files? need to split it up
+if 'ipe' in config.keys():
+    ipe=[os.path.realpath(f) for f in config['ipe'].split()]
+    infiles=[os.path.basename(f) for f in ipe]
+    print("Inputs:\n"+" ".join(ipe))
+    # We need an ind, cause it is called in the 
+    # individual rule files
+    ind=os.path.dirname(ipe[0])
+
+print("Output directory:\n"+outd)
     
     
 
 # check input directory for files
-if ind != False:
-    job_ids=[]
 
-    # find all the files in the directory
-    infiles=os.listdir(ind)
+job_ids=[]
 
-    # find all assbly with ending .fna, .fasta, .fa
-    # find all raw reads with ending .fastq.gz, .fastq., .fq, .fq.gz
-    assbly=[f for f in infiles if (f.endswith(".fna") or f.endswith(".fasta") or f.endswith(".fa"))]
-    rawr=[f for f in infiles if (f.endswith(".fastq.gz") or f.endswith(".fastq") or f.endswith(".fq") or f.endswith(".fq.gz"))]
+# find all assbly with ending .fna, .fasta, .fa
+# find all raw reads with ending .fastq.gz, .fastq., .fq, .fq.gz
+assbly=[f for f in infiles if (f.endswith(".fna") or f.endswith(".fasta") or f.endswith(".fa"))]
+longr=[f for f in infiles if (f.endswith("_SE.fastq.gz") or f.endswith("_SE.fastq") or f.endswith("_SE.fq") or f.endswith("_SE.fq.gz"))]
+rawr=[f for f in infiles if (f.endswith(".fastq.gz") or f.endswith(".fastq") or f.endswith(".fq") or f.endswith(".fq.gz"))]
 
-    # find the matching raw files that have either a _1 _2 or _R1 _R2
-    r=re.compile("_R?[1|2][.|_]")
-    raw_pairs=get_pairs(list(filter(r.search, rawr)))
+# find the matching raw files that have either a _1 _2 or _R1 _R2
+r=re.compile("_R?[1|2][.|_]")
+raw_pairs=get_pairs(list(filter(r.search, rawr)))
+
+#if ind != False:
+if 'ind' in config.keys():
     raw_singles=list(set(rawr)-set(chain.from_iterable(raw_pairs)))
-
+elif 'inp' in config.keys():
+    raw_singles=longr
+else:
+    raw_singles=[]
 
 # get the ids of the different files (i.e. cut off the extensions)
 assbly_ids=sorted([f.rsplit('.', 1)[0] for f in assbly])
