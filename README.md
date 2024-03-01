@@ -45,7 +45,7 @@ To run the ListPred pipeline locally, snakemake (version >= 7.32.4) is required.
 	out=			# path to output directory 
 ```
 
-Examples:
+### Examples
 
 *directory as input ('ind'):*
 ```
