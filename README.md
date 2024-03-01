@@ -20,13 +20,13 @@ ListPred classifies isolates into low, medium, or high virulence risk categories
 
 ```
 ListPred_results
-├── isolate01_tblastxout.txt					# Output from the screening against the reference databases (blast/kma)
-├── combined_predictions_out_categorical.csv 	# Combined prediction output using class labels
-├── combined_predictions_out_numerical.csv 		# Combined prediction output using numerical values
-├── disinf_align_identities_out.csv 			# disinfectant tolerance reference genes %-idenity tables (ML prediction input)
-├── disinftolerance_prediction_out.csv 			# ML prediction output for disinfectant tolerance
-├── vir_align_identities_out.csv 				# virulence potential reference genes %-idenity tables (ML prediction input)
-└── virulence_prediction_out.csv 				# ML prediction output for virulence potential
+├── isolate01_tblastxout.txt                    # Output from the screening against the reference databases (blast/kma)
+├── combined_predictions_out_categorical.csv    # Combined prediction output using class labels
+├── combined_predictions_out_numerical.csv      # Combined prediction output using numerical values
+├── disinf_align_identities_out.csv             # disinfectant tolerance reference genes %-idenity tables (ML prediction input)
+├── disinftolerance_prediction_out.csv          # ML prediction output for disinfectant tolerance
+├── vir_align_identities_out.csv                # virulence potential reference genes %-idenity tables (ML prediction input)
+└── virulence_prediction_out.csv                # ML prediction output for virulence potential
 ```
 
 ### Usage
@@ -46,17 +46,24 @@ To run the ListPred pipeline locally, snakemake (version >= 7.32.4) is required.
 ```
 
 Examples:
+
+*directory as input ('ind'):*
 ```
-directory as input ('ind')
 snakemake --cores 4 --use-conda --config ind="path/to/input_directory" outd="path/to/output_directory"
+```
 
-assembly as input ('inp')
+*assembly as input ('inp'):*
+```
 snakemake --cores 4 --use-conda --config inp="path/to/assembly_01.fa" outd="path/to/output_directory"
+```
 
-long-read raw reads ('inp')
+*long-read raw reads ('inp'):*
+```
 snakemake --cores 4 --use-conda --config inp="path/to/longreads_SE.fastq.gz" outd="path/to/output_directory"
+```
 
-short-read raw reads ('ipe')
+*short-read raw reads ('ipe'):*
+```
 snakemake --cores 4 --use-conda --config ipe="path/to/shortreads_R1.fastq.gz path/to/shortreads_R2.fastq.gz" outd="path/to/output_directory" 
 ```
 
